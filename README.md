@@ -1,0 +1,2 @@
+# OutwikerPlugin
+Plugin for outwiker
