@@ -16,6 +16,12 @@ class AutoRenamer (object):
 	def _renamePage (self):
 		currentPage = self._application.selectedPage
                 text = currentPage.content.splitlines()[0]
+                text = self.getValidName(text)
                 if not text == "" and text != currentPage.title:
 			if testPageTitle (text) == True:
 				renamePage(currentPage, text)
+	def getValidName (self, name):
+		name = "".join(char for char in name if char not in "\/:*?<>|")
+		while name[-1] in " .":
+			name = name[0:len(name)-1]
+		return name
