@@ -13,11 +13,11 @@ class PluginVKO (Plugin):
 
 	@property
 	def name (self):
-		return u"Vitalii Koshura plugin"
+		return u"AutoRenamer"
 
 	@property
 	def description (self):
-		return u'''Plugin to work with directory structure'''
+		return u'''Plugin allows to rename the page automatically using the first line of the page'''
 
 	@property
 	def url (self):
