@@ -30,10 +30,6 @@ class PluginAutoRenamer (Plugin):
 	def version (self):
 		return __version__
 
-	@property
-	def author (self):
-		return u"Vitalii Koshura <delionkur-lestat@mail.ru>"
-
 	def initialize(self):
 		self._autorenamer.initialize()
 
