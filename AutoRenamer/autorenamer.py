@@ -5,6 +5,7 @@ import wx
 from outwiker.core.commands import MessageBox, testPageTitle, renamePage
 from outwiker.gui.preferences.preferencepanelinfo import PreferencePanelInfo
 from .preferencesPanel import PreferencesPanel
+from .config import PluginConfig
 
 from i18n import get_
 
@@ -22,13 +23,15 @@ class AutoRenamer (object):
 		self._application.onForceSave -= self._renamePage
 		self._application.onPreferencesDialogCreate -= self.__onPreferencesDialogCreate
 	def _renamePage (self):
-		currentPage = self._application.selectedPage
-		if currentPage is not None:
-	                text = currentPage.content.splitlines()[0]
-	                text = self.getValidName(text)
-	                if not text == "" and text != currentPage.title:
-				if testPageTitle (text) == True:
-					renamePage(currentPage, text)
+		config = PluginConfig (self._application.config)
+		if config.autoRenameAllPages:
+			currentPage = self._application.selectedPage
+			if currentPage is not None:
+		                text = currentPage.content.splitlines()[0]
+		                text = self.getValidName(text)
+		                if not text == "" and text != currentPage.title:
+					if testPageTitle (text) == True:
+						renamePage(currentPage, text)
 	def getValidName (self, name):
 		name = "".join(char for char in name if char not in "\/:*?<>|")
 		while name[-1] in " .":
