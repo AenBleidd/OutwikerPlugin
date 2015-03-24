@@ -13,10 +13,11 @@ class AutoRenamer (object):
 	def __init__ (self, plugin, application):
 		self._application = application
 		self._plugin = plugin
+
+	def initialize (self):
 		global _
 		_ = get_()
 
-	def initialize (self):
 		self._application.onForceSave += self._renamePage
 		self._application.onPreferencesDialogCreate += self.__onPreferencesDialogCreate
 	def destroy (self):
