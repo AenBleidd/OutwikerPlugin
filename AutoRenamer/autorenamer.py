@@ -2,10 +2,12 @@
 
 import wx
 
-from outwiker.core.commands import MessageBox, testPageTitle, renamePage
 from outwiker.gui.preferences.preferencepanelinfo import PreferencePanelInfo
+from outwiker.pages.html.basehtmlpanel import EVT_PAGE_TAB_CHANGED
+from .actions import AddAutoRenameTagAction 
 from .preferencesPanel import PreferencesPanel
-from .config import PluginConfig
+from .commands import AutoRenameTagCommand
+from .renamer import Renamer
 
 from i18n import get_
 
@@ -13,34 +15,73 @@ class AutoRenamer (object):
 	def __init__ (self, plugin, application):
 		self._application = application
 		self._plugin = plugin
+		self.ID_ADDAUTORENAMETAG = wx.NewId()
+		self._menu = None
 
 	def initialize (self):
 		global _
 		_ = get_()
 
-		self._application.onForceSave += self._renamePage
+		self._renamer = Renamer(self._application)
+
+		self._application.onForceSave += self._renamer.RenamePage
 		self._application.onPreferencesDialogCreate += self.__onPreferencesDialogCreate
+		self._application.onPageViewCreate += self.__onPageViewCreate
+		self._application.onPageViewDestroy += self.__onPageViewDestroy
+		self._application.onWikiParserPrepare += self.__onWikiParserPrepare
+
 	def destroy (self):
-		self._application.onForceSave -= self._renamePage
+		self._application.onForceSave -= self._renamer.RenamePage
 		self._application.onPreferencesDialogCreate -= self.__onPreferencesDialogCreate
-	def _renamePage (self):
-		config = PluginConfig (self._application.config)
-		if config.autoRenameAllPages:
-			currentPage = self._application.selectedPage
-			if currentPage is not None:
-		                text = currentPage.content.splitlines()[0]
-		                text = self.getValidName(text)
-		                if not text == "" and text != currentPage.title:
-					if testPageTitle (text) == True:
-						renamePage(currentPage, text)
-	def getValidName (self, name):
-		name = "".join(char for char in name if char not in "\/:*?<>|")
-		while name[-1] in " .":
-			name = name[0:len(name)-1]
-		return name
+		self._application.onPageViewCreate -= self.__onPageViewCreate
+		self._application.onPageViewDestroy -= self.__onPageViewDestroy
+		self._application.onWikiParserPrepare -= self.__onWikiParserPrepare
 
 	def __onPreferencesDialogCreate (self, dialog):
 		prefPanel = PreferencesPanel (dialog.treeBook, self._application.config)
 		panelName = _(u"AutoRenamer [Plugin]")
 		panelList = [PreferencePanelInfo (prefPanel, panelName)]
 		dialog.appendPreferenceGroup (panelName, panelList)
+
+	def __onPageViewCreate (self, page):
+		assert self._application.mainWindow is not None
+
+		if page.getTypeString() == u"wiki":
+			self.addMenuItem()
+		self._application.mainWindow.pagePanel.pageView.Bind (EVT_PAGE_TAB_CHANGED, self._onTabChanged)
+		self.enableMenu()
+
+	def __onPageViewDestroy (self, page):
+		assert self._application.mainWindow is not None
+
+		if page.getTypeString() == u"wiki":
+			self.removeMenuItem()
+		self._application.mainWindow.pagePanel.pageView.Unbind (EVT_PAGE_TAB_CHANGED, handler=self._onTabChanged)
+
+	def _onTabChanged(self, event):
+		self.enableMenu()
+		event.Skip()
+
+	def __onWikiParserPrepare (self, parser):
+		parser.addCommand (AutoRenameTagCommand(self._application, parser))
+
+	def enableMenu(self):
+		pageView = self._application.mainWindow.pagePanel.pageView
+		enabled = (pageView.selectedPageIndex == pageView.CODE_PAGE_INDEX)
+		self._application.actionController.enableTools (AddAutoRenameTagAction.stringId, enabled)
+	
+
+	def addMenuItem (self):
+		self._application.actionController.register (AddAutoRenameTagAction (self._application), None)
+		if self._application.mainWindow is not None:
+			self._menu = wx.Menu()
+			self._application.mainWindow.pagePanel.pageView.toolsMenu.AppendSubMenu (self._menu, _(u"AutoRenamer"))
+			self._application.actionController.appendMenuItem (AddAutoRenameTagAction.stringId, self._menu)
+
+	def removeMenuItem (self):
+		if self._application.mainWindow is not None:
+			self._application.actionController.removeMenuItem (AddAutoRenameTagAction.stringId)
+			pos = self._appication.mainWindow.pagePanel.pageView.toolsMenu.FindMenu (self._menu.GetTitle())
+			if pos != wx.NOT_FOUND:
+				self._application.mainWindow.mainMenu.Remove (pos)
+		self._application.actionController.removeAction (AddAutoRenameTagAction.stringId)

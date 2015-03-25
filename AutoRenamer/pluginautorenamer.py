@@ -4,10 +4,12 @@ import os.path
 
 from outwiker.core.pluginbase import Plugin
 from outwiker.core.application import Application
+from outwiker.core.system import getOS
 
 from autorenamer import AutoRenamer
-from outwiker.core.system import getOS
+
 from .i18n import set_
+
 __version__ = u"0.0.0.1"
 
 class PluginAutoRenamer (Plugin):
