@@ -24,7 +24,7 @@ class PluginAutoRenamer (Plugin):
 
 	@property
 	def description (self):
-		description = _(u'''Plugin allows to rename the page automatically using the first line of the page''')
+		description = _(u'''Plugin allows to rename all pages automatically using the first line of the page or automatically rename just those pages where you place (:autorename:) mark''')
 		author = _(u'''<b>Author:</b> Vitalii Koshura (delionkur-lestat@mail.ru)''')
 		return u"""{description}\n\n{author}""".format (description=description, author=author)
 
