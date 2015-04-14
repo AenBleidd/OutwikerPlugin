@@ -11,9 +11,9 @@ class Renamer (object):
 		if config.autoRenameAllPages or manual:
 			currentPage = self._application.selectedPage
 			if currentPage is not None:
-		                text = currentPage.content.splitlines()[0]
-		                text = self.getValidName(text)
-		                if not text == "" and text != currentPage.title:
+				text = currentPage.content.splitlines()[0]
+				text = self.getValidName(text)
+				if not text == "" and text != currentPage.title:
 					if testPageTitle (text) == True:
 						renamePage(currentPage, text)
 

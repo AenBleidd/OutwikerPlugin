@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23fd1fdf-58f0-45ea-9824-0e09c1b43fd4}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>actions.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="actions.py" />
+    <Compile Include="autorenamer.py" />
+    <Compile Include="commands.py" />
+    <Compile Include="config.py" />
+    <Compile Include="i18n.py" />
+    <Compile Include="pluginautorenamer.py" />
+    <Compile Include="preferencesController.py" />
+    <Compile Include="preferencesPanel.py" />
+    <Compile Include="renamer.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="locale\" />
+    <Folder Include="locale\en\" />
+    <Folder Include="locale\en\LC_MESSAGES\" />
+    <Folder Include="locale\ru_RU\" />
+    <Folder Include="locale\ru_RU\LC_MESSAGES\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="locale\AutoRenamer.pot" />
+    <Content Include="locale\en\LC_MESSAGES\AutoRenamer.mo" />
+    <Content Include="locale\en\LC_MESSAGES\AutoRenamer.po" />
+    <Content Include="locale\ru_RU\LC_MESSAGES\AutoRenamer.mo" />
+    <Content Include="locale\ru_RU\LC_MESSAGES\AutoRenamer.po" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
