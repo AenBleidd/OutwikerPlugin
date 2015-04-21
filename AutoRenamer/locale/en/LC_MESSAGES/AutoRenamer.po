@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AutoRenamer 0.0.01\n"
-"POT-Creation-Date: 2015-03-25 14:18+0200\n"
-"PO-Revision-Date: 2015-03-25 14:20+0200\n"
+"POT-Creation-Date: 2015-04-21 17:55+0200\n"
+"PO-Revision-Date: 2015-04-21 17:55+0200\n"
 "Last-Translator: Vitalii Koshura <delionkur-lestat@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -45,6 +45,14 @@ msgstr ""
 msgid "<b>Author:</b> Vitalii Koshura (delionkur-lestat@mail.ru)"
 msgstr "<b>Author:</b> Vitalii Koshura (delionkur-lestat@mail.ru)"
 
-#: D:\Dropbox\Development-1\OutwikerPlugin\AutoRenamer/preferencesPanel.py:21
+#: D:\Dropbox\Development-1\OutwikerPlugin\AutoRenamer/preferencesPanel.py:22
 msgid "Automatically rename all pages according to their first line"
 msgstr "Automatically rename all pages according to their first line"
+
+#: D:\Dropbox\Development-1\OutwikerPlugin\AutoRenamer/preferencesPanel.py:25
+msgid ""
+"Automatically set first line of the page be the name of this page on page "
+"create"
+msgstr ""
+"Automatically set first line of the page be the name of this page on page "
+"create"

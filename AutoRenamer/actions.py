@@ -25,4 +25,3 @@ class AddAutoRenameTagAction (BaseHeadAction):
 
 	def run (self, params):
 		self._application.mainWindow.pagePanel.pageView.codeEditor.AddText (u"(:autorename:)")
-

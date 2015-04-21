@@ -13,6 +13,8 @@ class PreferencesController (object):
 
 	def loadState (self):
 		self.__owner.autoRenameAllPagesCheckBox.SetValue (self.__config.autoRenameAllPages)
+		self.__owner.autoAddFirstLineCheckBox.SetValue (self.__config.autoSetFirstLine)
 
 	def save (self):
 		self.__config.autoRenameAllPages = self.__owner.autoRenameAllPagesCheckBox.IsChecked()
+		self.__config.autoSetFirstLine = self.__owner.autoAddFirstLineCheckBox.IsChecked()

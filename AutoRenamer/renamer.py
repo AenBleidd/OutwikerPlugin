@@ -10,12 +10,16 @@ class Renamer (object):
 		config = PluginConfig (self._application.config)
 		if config.autoRenameAllPages or manual:
 			currentPage = self._application.selectedPage
-			if currentPage is not None:
+			if currentPage is not None and not currentPage.content == "":
 				text = currentPage.content.splitlines()[0]
 				text = self.getValidName(text)
 				if not text == "" and text != currentPage.title:
 					if testPageTitle (text) == True:
 						renamePage(currentPage, text)
+		if config.autoSetFirstLine:
+			currentPage = self._application.selectedPage
+			if currentPage is not None and currentPage.content == "":
+				currentPage.content = currentPage.title
 
 	def getValidName (self, name):
 		name = "".join(char for char in name if char not in "\/:*?<>|")

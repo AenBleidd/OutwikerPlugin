@@ -48,15 +48,15 @@ class AutoRenamer (object):
 
 		if page.getTypeString() == u"wiki":
 			self.addMenuItem()
-		self._application.mainWindow.pagePanel.pageView.Bind (EVT_PAGE_TAB_CHANGED, self._onTabChanged)
-		self.enableMenu()
+			self._application.mainWindow.pagePanel.pageView.Bind (EVT_PAGE_TAB_CHANGED, self._onTabChanged)
+			self.enableMenu()
 
 	def __onPageViewDestroy (self, page):
 		assert self._application.mainWindow is not None
 
 		if page.getTypeString() == u"wiki":
 			self.removeMenuItem()
-		self._application.mainWindow.pagePanel.pageView.Unbind (EVT_PAGE_TAB_CHANGED, handler=self._onTabChanged)
+			self._application.mainWindow.pagePanel.pageView.Unbind (EVT_PAGE_TAB_CHANGED, handler=self._onTabChanged)
 
 	def _onTabChanged(self, event):
 		self.enableMenu()
@@ -75,13 +75,12 @@ class AutoRenamer (object):
 		self._application.actionController.register (AddAutoRenameTagAction (self._application), None)
 		if self._application.mainWindow is not None:
 			self._menu = wx.Menu()
-			self._application.mainWindow.pagePanel.pageView.toolsMenu.AppendSubMenu (self._menu, _(u"AutoRenamer"))
+			self._submenuItem = self._application.mainWindow.pagePanel.pageView.toolsMenu.AppendSubMenu (self._menu, _(u"AutoRenamer"))
 			self._application.actionController.appendMenuItem (AddAutoRenameTagAction.stringId, self._menu)
 
 	def removeMenuItem (self):
 		if self._application.mainWindow is not None:
 			self._application.actionController.removeMenuItem (AddAutoRenameTagAction.stringId)
-			pos = self._appication.mainWindow.pagePanel.pageView.toolsMenu.FindMenu (self._menu.GetTitle())
-			if pos != wx.NOT_FOUND:
-				self._application.mainWindow.mainMenu.Remove (pos)
-		self._application.actionController.removeAction (AddAutoRenameTagAction.stringId)
+			self._application.mainWindow.pagePanel.pageView.toolsMenu.DestroyItem (self._submenuItem)
+			self._submenuItem = None
+			self._application.actionController.removeAction (AddAutoRenameTagAction.stringId)
