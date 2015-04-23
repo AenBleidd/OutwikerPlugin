@@ -10,7 +10,7 @@ from autorenamer import AutoRenamer
 
 from .i18n import set_
 
-__version__ = u"0.0.0.1"
+__version__ = u"0.0.0.2"
 
 class PluginAutoRenamer (Plugin):
 	
