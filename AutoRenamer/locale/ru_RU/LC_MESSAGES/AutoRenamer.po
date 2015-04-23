@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoRenamer 0.0.01\n"
 "POT-Creation-Date: 2015-04-21 17:56+0200\n"
-"PO-Revision-Date: 2015-04-21 17:56+0200\n"
+"PO-Revision-Date: 2015-04-23 13:46+0200\n"
 "Last-Translator: Vitalii Koshura <delionkur-lestat@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -53,7 +53,7 @@ msgstr "<b>Автор:</b> Vitalii Koshura (delionkur-lestat@mail.ru)"
 
 #: D:\Dropbox\Development-1\OutwikerPlugin\AutoRenamer/preferencesPanel.py:22
 msgid "Automatically rename all pages according to their first line"
-msgstr "Автоматически переименовывать файлы по их первой строке"
+msgstr "Автоматически переименовывать все страницы по их первой строке"
 
 #: D:\Dropbox\Development-1\OutwikerPlugin\AutoRenamer/preferencesPanel.py:25
 msgid ""
