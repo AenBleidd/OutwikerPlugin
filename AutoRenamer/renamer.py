@@ -22,7 +22,7 @@ class Renamer (object):
 				currentPage.content = currentPage.title
 
 	def getValidName (self, name):
-		name = "".join(char for char in name if char not in "\/:*?<>|")
+		name = "".join(char for char in name if char not in "\/:*?<>|!")
 		while name[-1] in " .":
 			name = name[0:len(name)-1]
 		return name
