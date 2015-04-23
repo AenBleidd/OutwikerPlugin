@@ -8,11 +8,11 @@ class PluginConfig (object):
 		self.section = u"AutoRenamerPlugin"
 
 		AUTORENAME_ALL_PAGES_OPTION = u"AutoRenameAllPages"
-		AUTORENAME_ALL_PAGES_DEFAULT = True
+		AUTORENAME_ALL_PAGES_DEFAULT = False
 		self.__autoRenameAllPages = BooleanOption (self.__config, self.section, AUTORENAME_ALL_PAGES_OPTION, AUTORENAME_ALL_PAGES_DEFAULT)
 
 		AUTOSET_FIRST_LINE_OPTION = u"AutoSetFirstLine"
-		AUTOSET_FIRST_LINE_DEFAULT = True
+		AUTOSET_FIRST_LINE_DEFAULT = False
 		self.__autoSetFirstLine = BooleanOption (self.__config, self.section, AUTOSET_FIRST_LINE_OPTION, AUTOSET_FIRST_LINE_DEFAULT)
 
 	@property
